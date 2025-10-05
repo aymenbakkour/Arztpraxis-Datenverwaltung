@@ -1,0 +1,5 @@
+{
+  "name": "Arztpraxis-Datenverwaltung",
+  "description": "Eine fortschrittliche und professionelle Webanwendung zur Verwaltung von Arztdaten in deutscher Sprache mit Funktionen wie Hinzufügen, Bearbeiten, Löschen, Filtern, Suchen und dem Import/Export von Excel-Dateien.",
+  "requestFramePermissions": []
+}
