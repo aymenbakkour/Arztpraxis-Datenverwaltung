@@ -1,5 +1,4 @@
-
-import React, { useState, useMemo, ChangeEvent, useRef } from 'react';
+import React, { useState, useMemo, ChangeEvent, useRef, useEffect } from 'react';
 import type { Doctor } from './types';
 import { useDoctors } from './hooks/useDoctors';
 import DoctorTable from './components/DoctorTable';
@@ -18,6 +17,18 @@ const App: React.FC = () => {
   const [editingDoctor, setEditingDoctor] = useState<Doctor | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(registration => {
+          console.log('ServiceWorker registered with scope: ', registration.scope);
+        }).catch(error => {
+          console.error('ServiceWorker registration failed: ', error);
+        });
+      });
+    }
+  }, []);
 
   const uniqueCities = useMemo(() => [...new Set(doctors.map(doc => doc.stadt))].sort(), [doctors]);
   const uniqueSpecialties = useMemo(() => [...new Set(doctors.map(doc => doc.fachgebiet))].sort(), [doctors]);

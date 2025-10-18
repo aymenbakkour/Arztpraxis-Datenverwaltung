@@ -44,7 +44,8 @@ const DoctorModal: React.FC<DoctorModalProps> = ({ doctor, onSave, onClose }) =>
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (Object.values(formData).some(value => value.trim() === '')) {
+    // Fix: Cast value to string to allow calling .trim(). All values in formData are known to be strings.
+    if (Object.values(formData).some(value => (value as string).trim() === '')) {
       alert("Bitte füllen Sie alle Felder aus.");
       return;
     }
